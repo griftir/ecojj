@@ -1,0 +1,30 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Game {
+  id          Int      @id @default(autoincrement())
+  title       String   @unique // Name of the game (e.g., "Leg Entanglement Defense")
+  description String? // Optional detailed explanation
+  tags        String[] // Array of searchable tags (e.g., ["guard", "attack", "defense"])
+  difficulty  String // Difficulty level (e.g., "beginner", "intermediate", "advanced")
+  duration    Int? // Estimated duration in minutes (optional)
+  category    String // Category (e.g., "positional drill", "live sparring")
+  createdById Int // Reference to the user who created the game
+  createdBy   User     @relation("UserGames", fields: [createdById], references: [id]) // Named relation
+  createdAt   DateTime @default(now()) // Timestamp for when the game was created
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  username  String   @unique
+  email     String   @unique
+  password  String
+  games     Game[]   @relation("UserGames") // Named relation matches the "createdBy" field in Game
+  createdAt DateTime @default(now())
+}

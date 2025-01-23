@@ -1,0 +1,31 @@
+# Docker Compose file for local development.
+# db: has a volume to persist data.
+# db-test: is ephemeral to be used for unit and e2e tests.
+
+volumes:
+  postgres:
+
+services:
+  db:
+    image: postgres:17.2
+    restart: always
+    environment:
+      - POSTGRES_USER=myuser
+      - POSTGRES_PASSWORD=mypassword
+      - POSTGRES_DB=postgres
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+
+  db-test:
+    image: postgres:17.2
+    restart: always
+    environment:
+      - POSTGRES_USER=myuser
+      - POSTGRES_PASSWORD=mypassword
+      - POSTGRES_DB=postgres
+    ports:
+      - '5433:5432'
+
+
