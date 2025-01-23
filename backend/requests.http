@@ -1,0 +1,16 @@
+http://localhost:3000/games
+###
+
+POST http://localhost:3000/games
+Content-Type: application/json
+
+{
+  "title": "Test Game",
+  "description": "This is a test game description",
+  "tags": ["strategy", "family"],
+  "difficulty": "medium",
+  "category": "board game",
+  "createdById": 1
+}
+
+###
