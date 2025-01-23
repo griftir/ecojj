@@ -1,0 +1,38 @@
+{
+    "realm": "bjj-app",
+    "enabled": true,
+    "users": [
+      {
+        "username": "admin",
+        "enabled": true,
+        "credentials": [
+          {
+            "type": "password",
+            "value": "securepassword"
+          }
+        ]
+      }
+    ],
+    "clients": [
+      {
+        "clientId": "bjj-frontend",
+        "directAccessGrantsEnabled": true,
+        "redirectUris": ["http://localhost:3000/*"],
+        "publicClient": true,
+        "protocol": "openid-connect"
+      }
+    ],
+    "roles": {
+      "realm": [
+        {
+          "name": "coach",
+          "description": "Can manage games and users"
+        },
+        {
+          "name": "student",
+          "description": "Can play games"
+        }
+      ]
+    }
+  }
+  
